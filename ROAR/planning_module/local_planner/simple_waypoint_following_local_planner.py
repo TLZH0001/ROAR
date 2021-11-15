@@ -45,6 +45,10 @@ class SimpleWaypointFollowingLocalPlanner(LocalPlanner):
         self.closeness_threshold_config = json.load(Path(
             agent.agent_settings.simple_waypoint_local_planner_config_file_path).open(mode='r'))
 
+        self.target_wp = None
+        self.target_dis = None
+
+
     def set_mission_plan(self) -> None:
         """
         Clears current waypoints, and reset mission plan from start
@@ -59,6 +63,10 @@ class SimpleWaypointFollowingLocalPlanner(LocalPlanner):
                 self.mission_planner.mission_plan
         ):  # this actually clears the mission plan!!
             self.way_points_queue.append(self.mission_planner.mission_plan.popleft())
+        if len(self.way_points_queue) != 0:
+            self.target_wp = self.way_points_queue[0]
+            self.target_dis = float("inf")
+
 
     def is_done(self) -> bool:
         """
@@ -104,7 +112,9 @@ class SimpleWaypointFollowingLocalPlanner(LocalPlanner):
                 self.logger.info("Destination reached")
                 return VehicleControl()
             waypoint: Transform = self.way_points_queue[0]
+            self.target_wp = self.way_points_queue[0]
             curr_dist = vehicle_transform.location.distance(waypoint.location)
+            self.target_dis = curr_dist
             if curr_dist < curr_closest_dist:
                 # if i find a waypoint that is closer to me than before
                 # note that i will always enter here to start the calculation for curr_closest_dist

@@ -43,6 +43,9 @@ class Location(BaseModel):
     def to_array(self) -> np.array:
         return np.array([self.x, self.y, self.z])
 
+    def to_tuple(self):
+        return (self.x, self.y, self.z)
+
     def to_string(self) -> str:
         return f"{self.x},{self.y},{self.z}"
 

@@ -27,6 +27,7 @@ class WaypointFollowingMissionPlanner(MissionPlanner):
         Returns:
             mission plan that start from the current vehicle location
         """
+        print("running rinning lalalla")
         super(WaypointFollowingMissionPlanner, self).run_in_series()
         return self.produce_mission_plan()
 
@@ -37,6 +38,7 @@ class WaypointFollowingMissionPlanner(MissionPlanner):
         self.mission_plan = self.produce_mission_plan()
         self._mission_plan_backup = self.mission_plan.copy()
         self.logger.debug("Path Following Mission Planner Initiated.")
+
 
     def produce_mission_plan(self) -> deque:
         """
