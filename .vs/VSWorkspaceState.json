@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\ROAR",
+    "\\ROAR\\planning_module",
+    "\\ROAR\\planning_module\\local_planner",
+    "\\ROAR\\planning_module\\mission_planner",
+    "\\ROAR_Gym",
+    "\\ROAR_Gym\\Discrete_PID",
+    "\\ROAR_Gym\\ROAR_Gym",
+    "\\ROAR_Gym\\ROAR_Gym\\envs"
+  ],
+  "SelectedNode": "\\ROAR_Gym\\ROAR_Gym\\envs\\roar_pid_env.py",
+  "PreviewInSolutionExplorer": false
+}

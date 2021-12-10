@@ -9,6 +9,9 @@ from ROAR_Sim.carla_client.carla_runner import CarlaRunner
 from typing import Tuple
 from prettytable import PrettyTable
 from ROAR.agent_module.pid_agent import PIDAgent
+from ROAR.agent_module.discrete_rl_pid_eval_agent import PIDEvalAgent
+
+from ROAR_Gym.Discrete_PID.valid_pid_action import init_actions_space
 
 
 def compute_score(carla_runner: CarlaRunner) -> Tuple[float, int, int]:
@@ -75,8 +78,11 @@ def suppress_warnings():
 
 
 def main():
+
+    A = init_actions_space()
+
     suppress_warnings()
-    agent_class = PIDAgent
+    agent_class = PIDEvalAgent
     num_trials = 2
     total_score = 0
     num_laps = 2
