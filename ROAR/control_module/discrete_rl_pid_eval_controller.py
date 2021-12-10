@@ -173,7 +173,10 @@ class PIDEvalController(Controller):
         obs = self.get_obs()
 
         action, _ = self.pid_rl_model.predict(obs)
+        print(action)
         action = VALID_ACTIONS[int(action)]
+        print(action)
+        
 
         lat_k_p, lat_k_d, lat_k_i = action[0], action[1], action[2]
 
@@ -189,5 +192,8 @@ class PIDEvalController(Controller):
      
 
         steering = self.lat_pid_controller.run_in_series(next_waypoint=next_waypoint)
-        print(throttle, steering)
-        return VehicleControl(throttle=throttle, steering=steering)
+        
+
+        control = VehicleControl(throttle=throttle, steering=steering)
+        print("controller: ", control)
+        return control

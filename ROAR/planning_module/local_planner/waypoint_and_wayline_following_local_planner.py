@@ -173,7 +173,7 @@ class SimpleWpAndWlFollowingLocalPlanner(LocalPlanner):
         #                   f"Curr Transform: {self.agent.vehicle.transform}\n"
         #                   f"Target Location: {target_waypoint.location}\n"
         #                   f"Control: {control} | Speed: {Vehicle.get_speed(self.agent.vehicle)}\n")
-      
+        #print("plainng file: ", control)
         return control
 
     def set_closeness_threhold(self, config: dict):
