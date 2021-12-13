@@ -19,7 +19,7 @@ turning_boxes = [   [803, 870, -630, -570],
                     [788, 826, -356, -190],
                     [690, 732, 677, 706], 
                     [-620, -490, 642, 746], 
-                    [-676, -720, -115, -2.5], 
+                    [-720, -626, -115, -2.5], 
 
                     [-843, -827.4, -405, -265],
                     [-850, -821, -686, -278] 
@@ -50,6 +50,26 @@ def in_turning_box(cur_loc, box_boundary):
     #print(x, (x1, x2), (x >= x1 and x<=x2), z, (z1, z2),(z >= z1 and z <= z2))
     return (x >= x1 and x<=x2 and z >= z1 and z <= z2)
 
+
+hardcode_boxes = [[-250, 750, -680, -600], 
+                  [779, 837.2, -365, -121], 
+                  [740, 780, -150, 600], 
+                  [-300, 750, 600, 740]
+
+]
+
+hardcode_pid = [[0.2, 0, 0.2], 
+                [0.2, 0, 0.3], 
+                [0.2, 0.02, 0], 
+                [0.2, 0.02, 0]
+]
+
+def in_hardcode_boxes(cur_loc):
+    for i, box in enumerate(hardcode_boxes):
+        if in_turning_box(cur_loc, box): 
+            #print(i)
+            return i, True
+    return -1, False
 
 
 
@@ -175,17 +195,29 @@ class LatPIDController(Controller):
         k_d = self.agent.kwargs["lat_k_d"]
         k_i = self.agent.kwargs["lat_k_i"]
 
+        index, hardcode = in_hardcode_boxes((v_begin[0], v_begin[2]))
+        if hardcode:
+            k_p, k_d, k_i = hardcode_pid[index]
+
+        #print(k_p, k_d, k_i)
+
         lat_control = float(
               np.clip((k_p * error) + (k_d * _de) + (k_i * _ie), self.steering_boundary[0], self.steering_boundary[1])
              )
 
+
+
+
         # k_p, k_d, k_i = [0.2, 0.02, 0]
         # cal_steering = (k_p * error) + (k_d * _de) + (k_i * _ie)
         # lat_control =  0
-        # #print(v_begin)
+        # print(v_begin)
         
         # if turning((v_begin[0], v_begin[2])):
         #     #print(turning)
+        #     k_p = self.agent.kwargs["lat_k_p"]
+        #     k_d = self.agent.kwargs["lat_k_d"]
+        #     k_i = self.agent.kwargs["lat_k_i"]
         #     lat_control = float(
         #      np.clip((k_p * error) + (k_d * _de) + (k_i * _ie), -1, 1)
         #     )

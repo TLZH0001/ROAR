@@ -7,8 +7,9 @@ from ROAR.planning_module.mission_planner.waypoint_following_mission_planner imp
     WaypointFollowingMissionPlanner
 from ROAR.planning_module.behavior_planner.behavior_planner import \
     BehaviorPlanner
-from ROAR.planning_module.local_planner.simple_waypoint_following_local_planner import \
-    SimpleWaypointFollowingLocalPlanner
+# from ROAR.planning_module.local_planner.simple_waypoint_following_local_planner import \
+#     SimpleWaypointFollowingLocalPlanner
+from ROAR.planning_module.local_planner.waypoint_and_wayline_following_local_planner import SimpleWpAndWlFollowingLocalPlanner
 from ROAR.configurations.configuration import Configuration as AgentConfig
 
 
@@ -25,7 +26,7 @@ class PurePursuitAgent(Agent):
 
         # initiated right after mission plan
         self.behavior_planner = BehaviorPlanner(agent=self)
-        self.local_planner = SimpleWaypointFollowingLocalPlanner(
+        self.local_planner = SimpleWpAndWlFollowingLocalPlanner(
             agent=self,
             controller=self.pure_pursuit_controller,
             mission_planner=self.mission_planner,

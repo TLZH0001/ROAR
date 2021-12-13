@@ -85,7 +85,5 @@ class Configuration(BaseModel):
 
     simple_waypoint_local_planner_config_file_path: str = \
         Field(default="./ROAR_Sim/configurations/simple_waypoint_local_planner_config.json")
-    brake_waypoints_config_file_path: str = \
-        Field(default="./ROAR/configurations/brake_waypoints_config.json")
     max_speed: float = Field(default=200, description="maximum speed in which the vehicle can drive at")
     num_laps: int = Field(default=1, description="Number of laps to run for")

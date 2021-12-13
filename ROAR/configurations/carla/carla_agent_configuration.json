@@ -66,15 +66,14 @@
     ]
   },
   "_comments": "// if you would like to use your own map, please put it under ROAR/configurations/YOUR_WAYPOINT.txt",
-  "waypoint_file_path": "./ROAR/configurations/custom_waypoints_NEW.txt",
+  "waypoint_file_path": "./ROAR_Sim/data/berkeley_minor_waypoints.txt",
   "pid_config_file_path": "./ROAR/configurations/carla/carla_pid_config.json",
   "simple_waypoint_local_planner_config_file_path": "./ROAR/configurations/carla/carla_simple_waypoint_local_planner_config.json",
-  "brake_waypoints_config_file_path": "./ROAR/configurations/brake_waypoints_config_NEW.json",
   "output_data_folder_path": "./data/output",
   "enable_autopilot": true,
   "spawn_point_id": 1,
   "show_sensors_data": true,
   "save_sensor_data": false,
-  "max_speed": 250
+  "max_speed": 100
 }
 
