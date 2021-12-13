@@ -1,3 +1,4 @@
+import sys
 from ROAR.agent_module.agent import Agent
 from pathlib import Path
 
@@ -36,6 +37,7 @@ class PIDEvalAgent(Agent):
         self.logger.debug(
             f"Waypoint Following Agent Initiated. Reading f"
             f"rom {self.route_file_path.as_posix()}")
+        # self.i = 0
 
     def run_step(self, vehicle: Vehicle,
                  sensors_data: SensorsData) -> VehicleControl:
@@ -43,5 +45,4 @@ class PIDEvalAgent(Agent):
                                        sensors_data=sensors_data)
         self.transform_history.append(self.vehicle.transform)
         control = self.local_planner.run_in_series()
-        #print("agent file;: ", control)
         return control
